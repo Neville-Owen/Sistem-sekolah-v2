@@ -8,6 +8,36 @@ class StudentController extends Controller
 {
     public function index()
     {
-        return 'ini masih halaman tambah siswa';
+        return "Menampilkan halaman daftar siswa";
+    }
+
+    public function create()
+    {
+        return "Menampilkan halaman tambah siswa";
+    }
+
+    public function store(Request $request)
+    {
+        return "Melakukan penambahan data siswa";
+    }
+
+    public function show(string $id)
+    {
+        return "Menampilkan siswa dengan ID: {$id}";
+    }
+
+    public function edit(string $id)
+    {
+        return "Menampilkan halaman edit siswa dengan ID: {$id}";
+    }
+
+    public function update(Request $request, string $id)
+    {
+        return "Melakukan perubahan data siswa dengan ID: {$id}";
+    }
+
+    public function destroy(string $id)
+    {
+        return "Menghapus data siswa dengan ID: {$id}";
     }
 }
