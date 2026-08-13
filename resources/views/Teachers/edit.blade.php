@@ -1,85 +1,117 @@
-<?php
+@extends ('layouts.app')
 
-namespace App\Http\Controllers;
+@section('title', $title)
 
-use Illuminate\Http\Request;
+@section('content')
+    <div class="mb-8 border-b border-[#E5E3DB] pb-5">
 
-class TeacherController extends Controller
-{
-    public function index()
-    {
-        $title = "Sistem Sekolah - Daftar Guru";
-        $teacher = [
-            [
-                'id' => 1,
-                'nis' => '1001',
-                'name' => 'Andi',
-                'class' => 'XII TKJ 3',
-                'major' => 'TKJ'
-            ],
-            [
-                'id' => 2,
-                'nis' => '1002',
-                'name' => 'Budi',
-                'class' => 'XII TKJ 2',
-                'major' => 'TKJ'
-            ],
-        ];
+        <a href="{{ route('teachers.index') }}"
+            class="text-xs uppercase tracking-[0.15em] text-slate-400 hover:text-[#A16207]">&larr; Buku
 
-        return view ('teachers.index', [
-            'title' => $title,
-            'teachers' => $teacher
-        ]);
-    }
+            Induk</a>
 
-       
-    
+        <h1 class="font-display mt-2 text-3xl font-semibold text-[#16213A]">Ubah Data Guru</h1>
 
-    public function show(string $id)
-    {
-        $title = "Sistem Sekolah - Detail Guru";
-        $description = "Menampilkan daftar guru yang terdaftar";
-        
-        return view('teachers.show', [
-            'title' => $title,
-            'description' => $description,
-        ]);
-    }
+        <p class="mt-1 text-sm text-slate-500">Memperbarui catatan atas nama <span class="font-medium text-[#16213A]">Budi
+                Santoso</span>.</p>
 
-    public function create()
-    {
-        $title = "Sistem Sekolah - Menambahkan Guru";
-        $description = "Menampilkan daftar guru yang terdaftar";
+    </div>
 
-        return view('teachers.create', [
-            'title' => $title,
-            'description' => $description,
-        ]);
-    } 
 
-    public function edit(string $id)
-    {
-        $title = "Sistem Sekolah - Edit Guru";
-        $description = "Menampilkan daftar guru yang terdaftar";
 
-        return view('teachers.edit', [
-            'title' => $title,
-            'description' => $description,
-        ]);
-    } 
+    <form action="" method="POST" class="space-y-6 border border-[#E5E3DB] bg-white p-8">
 
-    public function store()
-    {
-        return "Menambah data guru baru";
-    } 
+        <div>
 
-    public function update(string $id)
-    {
-        return "Mengubah data guru dengan ID: {$id}";
-    }
+            <label for="nip"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">NIP</label>
 
-    public function destroy(string $id)
-    {
-        return "Menghapus data guru dengan ID: {$id}";
-    }
-}
+            <input type="text" id="nis" name="nis" value="2024001"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+
+        </div>
+
+
+
+        <div>
+
+            <label for="name" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Nama
+
+                Lengkap</label>
+
+            <input type="text" id="name" name="name" value="Budi Santoso"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+
+        </div>
+
+
+
+        <div>
+
+            <label for="gender" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Jenis
+
+                Kelamin</label>
+
+            <select id="gender" name="gender"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+
+                <option value="L" selected>Laki-laki</option>
+
+                <option value="P">Perempuan</option>
+
+            </select>
+
+        </div>
+
+        <div>
+
+            <label for="class"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Subject</label>
+
+            <input type="text" id="class" name="class" value="Akutansi Dasar"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+
+        </div>
+
+        <div>
+
+            <label for="class"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Phone</label>
+
+            <input type="text" id="class" name="class" value="081234560001"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+
+        </div>
+
+        <div>
+
+            <label for="status" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Status
+
+            </label>
+
+            <select id="status" name="status"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+
+                <option value="A">Aktif</option>
+
+                <option value="TA">Tidak Aktif</option>
+
+            </select>
+
+        </div>
+
+        <div class="flex justify-end gap-4 border-t border-[#EFEDE6] pt-6">
+
+            <a href="{{ route('teachers.index') }}"
+                class="px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-[#16213A]">Batal</a>
+
+            <button type="submit"
+                class="bg-[#16213A] px-6 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">Perbarui
+
+                Catatan</button>
+
+        </div>
+
+    </form>
+
+@endsection

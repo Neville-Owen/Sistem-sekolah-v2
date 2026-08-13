@@ -9,69 +9,89 @@ class TeacherController extends Controller
     public function index()
     {
         $title = "Sistem Sekolah - Daftar Guru";
-       $teachers = [
-        [
-            'id' => 1,
-            'nip' => '198501012024',
-            'name' => 'Budi Santoso',
-            'gender' => 'Laki-Laki',
-            'subject' => 'Akuntansi Dasar',
-            'phone' => '081234560001',
-            'status' => 'Aktif',
-        ],
-        [
-            'id' => 2,
-            'nip' => '198703152024',
-            'name' => 'Siti Aminah',
-            'gender' => 'Perempuan',
-            'subject' => 'Jaringan Komputer',
-            'phone' => '081234560002',
-            'status' => 'Aktif',
-        ]
-];
+
+        $teachers = [
+            [
+                'id' => 1,
+                'nip' => '198501012024',
+                'name' => 'Budi Santoso',
+                'gender' => 'Laki-Laki',
+                'subject' => 'Akuntansi Dasar',
+                'phone' => '081234560001',
+                'status' => 'Aktif',
+            ],
+            [
+                'id' => 2,
+                'nip' => '198703152024',
+                'name' => 'Siti Aminah',
+                'gender' => 'Perempuan',
+                'subject' => 'Jaringan Komputer',
+                'phone' => '081234560002',
+                'status' => 'Aktif',
+            ],
+        ];
+
         return view('teachers.index', [
             'title' => $title,
-            'teachers' => $teachers
+            'teachers' => $teachers,
         ]);
     }
 
     public function show(string $id)
     {
         $title = "Sistem Sekolah - Detail Guru";
-        $description = "Menampilkan daftar guru yang terdaftar";
-        
+
+        $teacher = [
+            'id' => $id,
+            'nip' => '198501012024',
+            'name' => 'Budi Santoso',
+            'gender' => 'Laki-Laki',
+            'subject' => 'Akuntansi Dasar',
+            'phone' => '081234560001',
+            'phone_number' => '081234560001',
+            'status' => 'Aktif',
+        ];
+
         return view('teachers.show', [
             'title' => $title,
-            'description' => $description,
+            'teacher' => $teacher,
         ]);
     }
 
     public function create()
     {
-        $title = "Sistem Sekolah - Menambahkan Guru";
-        $description = "Menampilkan daftar guru yang terdaftar";
+        $title = "Sistem Sekolah - Tambah Guru";
 
         return view('teachers.create', [
             'title' => $title,
-            'description' => $description,
         ]);
-    } 
+    }
 
     public function edit(string $id)
     {
         $title = "Sistem Sekolah - Edit Guru";
-        $description = "Menampilkan daftar guru yang terdaftar";
+
+        $teacher = [
+            'id' => $id,
+            'nip' => '198501012024',
+            'name' => 'Budi Santoso',
+            'gender' => 'Laki-Laki',
+            'subject' => 'Akuntansi Dasar',
+            'phone' => '081234560001',
+            'phone_number' => '081234560001',
+            'status' => 'Aktif',
+        ];
 
         return view('teachers.edit', [
             'title' => $title,
-            'description' => $description,
+            'teacher' => $teacher,
         ]);
-    } 
+    }
 
     public function store()
     {
-        return "Menambah data guru baru";
-    } 
+        return "Menambahkan data guru baru";
+    }
 
     public function update(string $id)
     {

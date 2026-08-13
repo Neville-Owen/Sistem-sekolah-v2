@@ -1,110 +1,109 @@
-@extends ('layouts.app')
+@extends('layouts.app')
 
-@section('title', "Sistem Sekolah - Daftar Siswa")
-
+@section('title', $title)
 
 @section('content')
 
-
-    <div class="mb-8 flex items-end justify-between border-b border-[#E5E3DB] pb-5">
-
-        <div>
-
-            <p class="mb-1 text-[11px] uppercase tracking-[0.2em] text-[#A16207]">Tahun Ajaran
-                2025/2026</p>
-
-            <h1 class="font-display text-3xl font-semibold text-[#16213A]">Daftar Siswa</h1>
-
-        </div>
-
-        <a href="" class="bg-[#16213A] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">
-
-            Catat Siswa Baru
-
-        </a>
-
-    </div>
-
-
+    <x-page-header title="Daftar Kelas" action-route="classes.create" action-text="Tambah Kelas" />
 
     <div class="border border-[#E5E3DB] bg-white">
 
         <table class="w-full text-left text-sm">
 
             <thead>
-
                 <tr class="border-b border-[#16213A] text-[11px] uppercase tracking-[0.15em] text-[#16213A]">
 
-                    <th class="w-14 px-5 py-3.5 font-semibold">No.</th>
+                    <th class="w-14 px-5 py-3.5 font-semibold">
+                        No.
+                    </th>
 
-                    <th class="px-5 py-3.5 font-semibold">NIS</th>
+                    <th class="px-5 py-3.5 font-semibold">
+                        Nama Kelas
+                    </th>
 
-                    <th class="px-5 py-3.5 font-semibold">Nama Siswa</th>
+                    <th class="px-5 py-3.5 font-semibold">
+                        Tingkat
+                    </th>
 
-                    <th class="px-5 py-3.5 font-semibold">Kelas</th>
+                    <th class="px-5 py-3.5 font-semibold">
+                        Jurusan
+                    </th>
 
-                    <th class="px-5 py-3.5 font-semibold">Jurusan</th>
+                    <th class="px-5 py-3.5 font-semibold">
+                        Wali Kelas
+                    </th>
 
-                    <th class="px-5 py-3.5 text-right font-semibold">Tindakan</th>
+                    <th class="px-5 py-3.5 text-right font-semibold">
+                        Tindakan
+                    </th>
 
                 </tr>
-
             </thead>
 
             <tbody>
-                @foreach ($students as $student )
-                <tr class="border-b border-[#EFEDE6] hover:bg-[#FAF9F5]">
 
-                    <td class="px-5 py-4 font-display text-lg text-[#A16207]">
-                        {{ $loop -> iteration }}
-                    </td>
+                @foreach ($classes as $class)
 
-                    <td class="px-5 py-4 font-mono text-xs text-slate-500">
-                        {{ $student['nis'] }}
-                    </td>
+                    <tr class="border-b border-[#EFEDE6] hover:bg-[#FAF9F5]">
 
-                    <td class="px-5 py-4 font-medium text-[#16213A]">
-                        {{ $student['name'] }}
-                    </td>
+                        <td class="px-5 py-4 font-display text-lg text-[#A16207]">
+                            {{ $loop->iteration }}
+                        </td>
 
-                    <td class="px-5 py-4">
-                        {{ $student['class'] }}
-                    </td>
+                        <td class="px-5 py-4 font-medium text-[#16213A]">
+                            {{ $class['name'] }}
+                        </td>
 
-                    <td class="px-5 py-4">
-                        {{ $student['major'] }}
-                    </td>
+                        <td class="px-5 py-4">
+                            {{ $class['grade'] }}
+                        </td>
 
-                    <td class="px-5 py-4">
+                        <td class="px-5 py-4">
+                            {{ $class['major'] }}
+                        </td>
 
-                        <div class="flex justify-end gap-4 text-xs font-medium">
+                        <td class="px-5 py-4">
+                            {{ $class['homeroom_teacher'] }}
+                        </td>
 
-                            <a href="{{ route('students.show', ['id' => 1]) }}" class="text-[#16213A] hover:text-[#A16207]">Lihat</a>
+                        <td class="px-5 py-4">
 
-                            <a href="{{ route('students.edit', ['id' => 1]) }}" class="text-[#16213A] hover:text-[#A16207]">Ubah</a>
+                            <div class="flex justify-end gap-4 text-xs font-medium">
 
-                            <form action="" method="POST"
-                                onsubmit="return confirm('Hapus data siswa ini dari buku induk?')">
+                                <a href="{{ route('classes.show', ['id' => $class['id']]) }}"
+                                    class="text-[#16213A] hover:text-[#A16207]">
+                                    Lihat
+                                </a>
 
+                                <a href="{{ route('classes.edit', ['id' => $class['id']]) }}"
+                                    class="text-[#16213A] hover:text-[#A16207]">
+                                    Ubah
+                                </a>
 
+                                <form action="{{ route('classes.destroy', ['id' => $class['id']]) }}" method="POST"
+                                    onsubmit="return confirm('Hapus data kelas ini?')">
 
-                                <button type="submit" class="text-red-700 hover:text-red-900">Hapus</button>
+                                    @csrf
+                                    @method('DELETE')
 
-                            </form>
+                                    <button type="submit" class="text-red-700 hover:text-red-900">
+                                        Hapus
+                                    </button>
 
-                        </div>
+                                </form>
 
-                    </td>
+                            </div>
 
-                </tr>
+                        </td>
+
+                    </tr>
+
                 @endforeach
-                
 
             </tbody>
 
         </table>
 
     </div>
-
 
 @endsection
